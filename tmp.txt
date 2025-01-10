@@ -1,0 +1,1 @@
+mkdir: impossible de créer le répertoire « /home/ok/.config »: Le fichier existe
