@@ -1,0 +1,21 @@
+" Met les nombres aux débuts des lignes
+set nu
+set rnu
+
+
+" Met de la couleur
+syntax enable
+
+
+" Met le surlignage
+set hls is
+
+" Evite la casse (diff maj/min)
+set ic
+
+
+" Help coding
+set tabstop=4
+set autoindent
+" Remove Hightlight with 'Space'
+nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
