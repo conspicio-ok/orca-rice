@@ -11,6 +11,7 @@
     // Modules Left
     "modules-left": [
         "hyprland/workspaces",
+		"custom/updates",
         "hyprland/mode",
         "hyprland/scratchpad",
         "custom/media"
@@ -40,6 +41,8 @@
     ],
 
     // Modules configuration
+
+	// Workspaces
     "hyprland/workspaces": {
 		"on-click": "activate",
 		"active-only": false,
@@ -59,6 +62,19 @@
 			"*": 5
 		}
     },
+
+
+	// Updates Count
+	"custom/updates": {
+		"format": " {}",
+		// "escape": true,
+		"return-type": "json",
+		"exec": "~/.config/dotfiles/scripts/updates.sh",
+		"restart-interval": 300,
+		"on-click": "alacritty -e ~/.config/dotfiles/scripts/installupdates.sh",
+		"tooltip": false
+	},
+
     "keyboard-state": {
         "numlock": true,
         "capslock": true,
@@ -208,8 +224,11 @@
         "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null" // Script in resources folder
         // "exec": "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null" // Filter player based on name
     },
+	
+	// Power Menu
     "custom/power": {
         "format" : "⏻ ",
+		"on-click": "wlogout",
 		"tooltip": false,
 		"menu": "on-click",
 		"menu-file": "$HOME/.config/waybar/power_menu.xml", // Menu file in resources folder
