@@ -1,7 +1,3 @@
-/* @import 'path/to/css'; */
-
-@define-color bg-clr #FFFFFF;
-
 * {
     font-family: FontAwesome, Roboto, Helvetica, Arial, sans-serif;
     font-size: 13px;
@@ -29,19 +25,13 @@ window#waybar.chromium {
 
 button {
     /* Use box-shadow instead of border so the text isn't offset */
-    box-shadow: inset 0 -3px transparent;
+    box-shadow: inset 0 -5px transparent;
     /* Avoid rounded borders under each button name */
     border: none;
     border-radius: 0;
 }
 
-/* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
-button:hover {
-    background: inherit;
-    box-shadow: inset 0 -3px #ffffff;
-}
-
-/* Transparent background for every modules */
+/* Background */
 #network,
 #backlight,
 #temperature,
@@ -51,15 +41,27 @@ button:hover {
 #memory,
 #battery,
 #updates,
-#updates button,
+#workspaces,
 #clock {
 	background-color: rgba(171, 202, 234, 0.4);
 	border-radius: 8px;
 }
 
+/* Error/Warning */
+#network.disconnected {
+    background-color: rgba(245, 60, 60, 0.2);
+}
+
+/* Good */
+#battery.charging, #battery.plugged {
+    background-color: rgba(38, 166, 91, 0.4);
+}
+
 #workspaces button {
-    padding: 0 5px;
-    background-color: transparent;
+	margin: 2px 2px;
+    padding: 0 4px;
+    background-color: rgba(137, 165, 193, 0.4);
+	border-radius: 8px;
     color: #ffffff;
 }
 
@@ -70,6 +72,7 @@ button:hover {
 #workspaces button.focused {
     background-color: #64727D;
     box-shadow: inset 0 -3px #ffffff;
+	border: 2mm ridge red;
 }
 
 #workspaces button.urgent {
@@ -98,28 +101,13 @@ button:hover {
 #scratchpad,
 #power-profiles-daemon,
 #mpd {
-    padding: 0 10px;
+    padding: 0 8px;
     color: #ffffff;
-}
-
-#window,
-#workspaces {
-    margin: 0 4px;
 }
 
 /* If workspaces is the leftmost module, omit left margin */
 .modules-left > widget:first-child > #workspaces {
-    margin-left: 0;
-}
-
-/* If workspaces is the rightmost module, omit right margin */
-.modules-right > widget:last-child > #workspaces {
-    margin-right: 0;
-}
-
-#battery.charging, #battery.plugged {
-    color: #ffffff;
-    background-color: #26A65B;
+    margin-left: 16px;
 }
 
 @keyframes blink {
@@ -131,7 +119,7 @@ button:hover {
 
 /* Using steps() instead of linear as a timing function to limit cpu usage */
 #battery.critical:not(.charging) {
-    background-color: #f53c3c;
+    background-color: rgba(245, 60, 60, 0.2);
     color: #ffffff;
     animation-name: blink;
     animation-duration: 0.5s;
@@ -165,10 +153,6 @@ label:focus {
 
 #disk {
     background-color: #964B00;
-}
-
-#network.disconnected {
-    background-color: #f53c3c;
 }
 
 #pulseaudio.muted {

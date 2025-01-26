@@ -13,8 +13,7 @@
         "hyprland/workspaces",
 		"custom/updates",
         "hyprland/mode",
-        "hyprland/scratchpad",
-        "custom/media"
+        "hyprland/scratchpad"
     ],
 
 	// Modules Center
@@ -188,7 +187,7 @@
     "network": {
         "format-wifi": "{essid} ",
         "format-ethernet": "{ipaddr}/{cidr} ",
-        "tooltip-format": "{ifname} via {gwaddr} ",
+        "tooltip-format": "{ifname}: {gwaddr} ",
         "format-linked": "{ifname} (No IP) ",
         "format-disconnected": "Disconnected ⚠",
         "format-alt": "{ifname}: {ipaddr}/{cidr}"
@@ -212,19 +211,7 @@
         },
         "on-click": "pavucontrol"
     },
-    "custom/media": {
-        "format": "{icon} {text}",
-        "return-type": "json",
-        "max-length": 40,
-        "format-icons": {
-            "spotify": "",
-            "default": "🎜"
-        },
-        "escape": true,
-        "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null" // Script in resources folder
-        // "exec": "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null" // Filter player based on name
-    },
-	
+
 	// Power Menu
     "custom/power": {
         "format" : "⏻ ",
