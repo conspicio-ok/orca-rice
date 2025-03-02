@@ -1,0 +1,6 @@
+% egrep -v '^#' ~/.config/ncmpcpp/config
+mpd_music_dir = "~/Musique/"
+visualizer_in_stereo = "yes"
+mpd_host = "localhost"
+mpd_port = "6601"
+
