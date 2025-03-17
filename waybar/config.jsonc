@@ -65,7 +65,7 @@
 
 	// Updates Count
 	"custom/updates": {
-		"format": " {}",
+		"format": "  {}",
 		// "escape": true,
 		"return-type": "json",
 		"exec": "~/.config/dotfiles/scripts/updates.sh",

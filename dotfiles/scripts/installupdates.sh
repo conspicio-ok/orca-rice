@@ -1,5 +1,6 @@
 #!/bin/bash
 
-sudo pacman -Syu
+sudo pacman -Syuu
+./install_packages.sh
 cd $HOME/.config
 git pull

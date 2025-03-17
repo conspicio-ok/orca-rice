@@ -1,0 +1,34 @@
+0 0 : comment
+0 1 : just install the package
+0 2 : install + systemctl enable
+0
+0 system
+2ly
+1hyprland
+1wayland
+1wayland-protocols
+1xorg-xway
+0
+0 help user
+1openssh
+1unzip
+1tar
+0
+0 background
+1hyprpaper
+0
+0 fonts
+1ttf-font-awesome
+1ttf-meslo-nerd
+0
+0 user command
+1exa
+1tree
+0
+0 bluetooth
+1bluez-utils
+2bluez
+0 music player
+2mpd
+1ncmpcpp
+0wildmidi
