@@ -21,14 +21,14 @@ do
 		else
 			echo "$package is not installed"
 			echo "Installation of $package..."
-			sudo pacman -S $(package)
+			sudo pacman -S --noconfirm $package
 			echo "$package installed !"
 			if [ $number -eq 2 ]; then
 				echo "Activation of $package..."
-				sudo systemctl enable $(package)
+				sudo systemctl enable $package
 				echo "$package activated"
 				echo "Start $package"
-				sudo systemctl start $(package)
+				sudo systemctl start $package
 				echo "$package is started"
 				echo "Please restart system for active the update !!!"
 			fi
