@@ -2,7 +2,7 @@
 #if [ -n "$x" ]
 
 # Packages list files
-file="package.txt"
+file="$HOME/.config/dotfiles/docs/package.txt"
 
 # Check if packages file exist
 if [ ! -f "$file" ];	then
