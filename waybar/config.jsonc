@@ -70,7 +70,7 @@
 		"return-type": "json",
 		"exec": "~/.config/dotfiles/scripts/updates.sh",
 		"restart-interval": 300,
-		"on-click": "alacritty -e ~/.config/dotfiles/scripts/installupdates.sh",
+		"on-click": "alacritty -e ~/.config/dotfiles/scripts/install_updates.sh",
 		"tooltip": false
 	},
 
