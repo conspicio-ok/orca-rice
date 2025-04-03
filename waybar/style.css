@@ -32,37 +32,45 @@ button {
 }
 
 /* Background */
-#network,
-#backlight,
-#temperature,
+#workspaces,
+#clock,
 #pulseaudio,
-#tray,
+#network,
 #cpu,
 #memory,
-#battery,
-#updates,
-#workspaces,
-#clock {
+#temperature,
+#tray,
+
+#backlight,
+#battery
+{
 	background-color: rgba(171, 202, 234, 0.4);
 	border-radius: 8px;
+    color: #ffffff;
 }
 
 /* Error/Warning */
-#network.disconnected {
-    background-color: rgba(245, 60, 60, 0.2);
+#network.disconnected,
+#workspaces button.urgent
+{
+    background-color: rgba(245, 60, 60, 0.4);
 }
 
 /* Good */
-#battery.charging, #battery.plugged {
+#battery.charging,
+#battery.plugged
+{
     background-color: rgba(38, 166, 91, 0.4);
 }
 
-#workspaces button {
+/* Workspace */
+#workspaces button
+{
 	margin: 2px 2px;
-    padding: 0 4px;
+    padding: 0px 4px;
     background-color: rgba(137, 165, 193, 0.4);
 	border-radius: 8px;
-    color: #ffffff;
+	color: inherit;
 }
 
 #workspaces button:hover {
@@ -73,10 +81,6 @@ button {
     background-color: #64727D;
     box-shadow: inset 0 -3px #ffffff;
 	border: 2mm ridge red;
-}
-
-#workspaces button.urgent {
-    background-color: #eb4d4b;
 }
 
 #mode {
@@ -102,7 +106,6 @@ button {
 #power-profiles-daemon,
 #mpd {
     padding: 0 8px;
-    color: #ffffff;
 }
 
 /* If workspaces is the leftmost module, omit left margin */
@@ -155,11 +158,6 @@ label:focus {
     background-color: #964B00;
 }
 
-#pulseaudio.muted {
-    background-color: #90b1b1;
-    color: #2a5c45;
-}
-
 #wireplumber {
     background-color: #fff0f5;
     color: #000000;
@@ -207,7 +205,6 @@ label:focus {
 
 #mpd {
     background-color: #66cc99;
-    color: #2a5c45;
 }
 
 #mpd.disconnected {
