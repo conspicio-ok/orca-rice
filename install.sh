@@ -22,8 +22,8 @@ cd;
 orca='orca-rice';
 if [ -d $orca ];
 then
-	echo "$orca is not found, please move it at your home !";
-else
+#	echo "$orca is not found, please move it at your home !";
+#else
 	print_section  "CREATE '.config' FOLDER";
 	mkdir $HOME/.config 2> tmp.txt
 	echo ;
