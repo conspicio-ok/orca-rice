@@ -7,7 +7,13 @@
 1hyprland
 1wayland
 1wayland-protocols
-1xorg-xway
+1xorg-xwayland
+1vim
+1firefox
+1zsh
+1alacritty
+1dolphin
+1wofi
 0
 0 help user
 1openssh
@@ -24,6 +30,7 @@
 0 user command
 1exa
 1tree
+1bat
 0
 0 bluetooth
 1bluez-utils
