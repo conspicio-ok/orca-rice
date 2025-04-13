@@ -15,6 +15,7 @@
 1alacritty
 1dolphin
 1wofi
+1dunst
 0
 0 help user
 1openssh
