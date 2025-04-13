@@ -6,6 +6,7 @@
 2ly
 1hyprland
 1wayland
+1waybar
 1wayland-protocols
 1xorg-xwayland
 1vim

@@ -10,7 +10,7 @@ function print_section {
 		string=$string' ';
 	}
 	for ((i=0; i<$(($col/2)); i++)) {
-		string=$string'-';
+		string=$string'=';
 	}
 	string=$string$1$string
 
