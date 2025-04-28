@@ -30,8 +30,8 @@ else
 	echo ;
 	
 	print_section "MOVE CURRENTS FILES IN THE .CONFIG FOLDER"
-	mv $HOME/orca-rice/* $HOME/.config 2> tmp.txt
-	mv $HOME/orca-rice/.* $HOME/.config 2> tmp.txt
+	mv $HOME/orca-rice/* $HOME/.config > tmp.txt
+	mv $HOME/orca-rice/.* $HOME/.config > tmp.txt
 	echo ;
 	echo ;
 	
@@ -39,6 +39,16 @@ else
 	bash $HOME/.config/dotfiles/scripts/install_packages.sh;
 	echo ;
 	echo ;
+
+	print_section "CREATE BASHRC";
+	if [ -f $HOME/.bashrc ];
+		then	rm $HOME/.bashrc;
+	fi
+	ln -s $HOME/.config/bash/bashrc $HOME/.bashrc
+	if [ -f /root/.bashrc ];
+		then	rm /root/.bashrc;
+	fi
+	ln -s $HOME/.config/bash/bashrc /root/.bashrc
 fi
 
 
