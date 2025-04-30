@@ -37,7 +37,23 @@
 0 bluetooth
 1bluez-utils
 2bluez
+0
 0 music player
 2mpd
 1ncmpcpp
 0wildmidi
+0
+0 Games
+1lutris
+1wine
+1wine-mono
+1wine-gecko
+1winetricks
+1lib32-gnutls
+1lib32-mpg123
+1lib32-v4-utils
+llib32-libpulse
+1lib32-openal
+1lib32-libldap
+1lib32-libxml2
+1lib32-sqlite

@@ -8,6 +8,8 @@
     "spacing": 4,
 
 
+
+
     // Modules Left
     "modules-left": [
         "hyprland/workspaces",
@@ -26,6 +28,7 @@
         "mpd",
         "idle_inhibitor",
         "pulseaudio",
+		"custom/bluetooth",
         "network",
         "power-profiles-daemon",
         "cpu",
@@ -38,6 +41,9 @@
         "tray",
         "custom/power"
     ],
+
+
+
 
     // Modules configuration
 
@@ -218,6 +224,11 @@
         },
         "on-click": "pavucontrol"
     },
+	"custom/bluetooth": {
+		"format": "",
+		"tooltip": false,
+		"on-click": "alacritty -e ~/.config/dotfiles/modules-waybar/wofi-bluetooth.sh"
+ 	},
 
 	// Power Menu
     "custom/power": {

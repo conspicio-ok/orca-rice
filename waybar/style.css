@@ -33,8 +33,12 @@ button {
 
 /* Background */
 #workspaces,
+#custom-updates,
+
 #clock,
+
 #pulseaudio,
+#custom-bluetooth,
 #network,
 #cpu,
 #memory,
@@ -104,6 +108,8 @@ button {
 #idle_inhibitor,
 #scratchpad,
 #power-profiles-daemon,
+#custom-bluetooth,
+#custom-updates,
 #mpd {
     padding: 0 8px;
 }
