@@ -1,14 +1,37 @@
+0 /* -------------------- documentation area -------------------- */
+0
+0
+0
 0 0 : comment
 0 1 : just install the package
 0 2 : install + systemctl enable
 0
-0 system
+0
+0
+0
+0 /* -------------------- system utils -------------------- */
+0
+0
 2ly
 1hyprland
 1wayland
-1waybar
 1wayland-protocols
 1xorg-xwayland
+1waybar
+2pipewire
+2pipewire-pulse
+2pipewire-media-session
+1gst-plugin-pipewire
+1libpipewire-0.3
+1wl-clipboard
+1xdg-desktop-portal
+1sdg-desktop-portal-hyprland
+0
+0
+0
+0 /* -------------------- basics apps -------------------- */
+0
+0
 1vim
 1firefox
 1zsh
@@ -16,34 +39,55 @@
 1dolphin
 1wofi
 1dunst
+1grim
+1slurp
 0
-0 help user
-1openssh
-1unzip
-1tar
 0
-0 background
-1hyprpaper
 0
-0 fonts
-1ttf-font-awesome
-1ttf-meslo-nerd
+0 /* -------------------- easier life packages -------------------- */
 0
-0 user command
-1exa
-1tree
-1bat
 0
-0 bluetooth
 1bluez-utils
 2bluez
 0
-0 music player
 2mpd
 1ncmpcpp
 0wildmidi
 0
-0 Games
+1openssh
+1unzip
+1tar
+0
+0
+0
+0 /* -------------------- customization  -------------------- */
+0
+0
+1hyprpaper
+0
+0
+0
+0 /* -------------------- front extensions -------------------- */
+0
+0
+1ttf-font-awesome
+1ttf-meslo-nerd
+1ffmpeg
+0
+0
+0
+0 /* -------------------- user commands -------------------- */
+0
+0
+1exa
+1tree
+1bat
+0
+0
+0
+0 /* -------------------- games area -------------------- */
+0
+0
 1lutris
 1wine
 1wine-mono
