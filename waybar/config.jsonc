@@ -30,10 +30,10 @@
 		"pulseaudio",
 		"bluetooth",
 		"custom/bluetooth",
-		"network",
 		"power-profiles-daemon",
 		"cpu",
 		"memory",
+		"network",
 		"backlight",
 		"battery",
 		"battery#bat2",
@@ -135,7 +135,7 @@
 	"clock": {
 		"timezone": "Europe/Paris",
 		"tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-		"format-alt": "{:%Y-%m-%d}"
+		"format-alt": "{:%d/%m/%Y}"
 	},
 	"cpu": {
 		"format": "{usage}% ",
@@ -181,20 +181,20 @@
 
 	// Network
 	"network": {
-		"format-wifi": "",
+		"format-wifi": " ",
 		"format-ethernet": "{ipaddr}/{cidr} ",
 		"tooltip-format": "{essid}",
 		"format-linked": "{ifname} (No IP) ",
 		"format-disconnected": "Disconnected ⚠",
-		"format-alt": "  {essid}"
+		"format-alt": "   {essid}"
 	},
 	"pulseaudio": {
 		"scroll-step": 1,
-		"format": "{volume}% {icon}    {format_source}",
+		"format": "{volume}% {icon}  {format_source}",
 		"format-bluetooth": "{volume}% {icon} {format_source}",
 		"format-bluetooth-muted": " {icon} {format_source}",
 		"format-muted": " {format_source}",
-		"format-source": "{volume}% ",
+		"format-source": "",
 		"format-source-muted": "",
 		"format-icons": {
 			"headphone": "",
@@ -231,16 +231,9 @@
 	},
 	// Power Menu
 	"custom/power": {
-		"format" : "⏻ ",
-		"on-click": "wlogout",
-		"tooltip": false,
-		"menu": "on-click",
-		"menu-file": "$HOME/.config/waybar/power_menu.xml", // Menu file in resources folder
-		"menu-actions": {
-			"shutdown": "shutdown",
-			"reboot": "reboot",
-			"suspend": "systemctl suspend",
-			"hibernate": "systemctl hibernate"
-		}
+		"format" : " ",
+		"tooltip-format": "Powermenu",
+		"on-click": "wlogout -b 4",
+		"tooltip": false
 	}
 }

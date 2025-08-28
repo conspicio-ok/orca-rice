@@ -38,7 +38,7 @@
 1zsh
 1alacritty
 1dolphin
-1wofi
+0rofi-wayland
 1dunst
 1grim
 1slurp
