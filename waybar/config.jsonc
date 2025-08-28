@@ -28,17 +28,17 @@
 		"mpd",
 		"idle_inhibitor",
 		"pulseaudio",
+		"bluetooth",
 		"custom/bluetooth",
 		"network",
 		"power-profiles-daemon",
 		"cpu",
 		"memory",
-		"temperature",
 		"backlight",
-		"keyboard-state",
 		"battery",
 		"battery#bat2",
 		"tray",
+		"custom/settings",
 		"custom/power"
 	],
 
@@ -64,9 +64,7 @@
 			"8": "8",
 			"9": "9",
 			"10": "10",
-			"urgent": "  ",
-			"focused": " ",
-			"default": " "
+			"urgent": "  "
 		},
 		"persistent_workspaces": {
 			"*": 5
@@ -81,21 +79,9 @@
 		"return-type": "json",
 		"exec": "~/.config/dotfiles/scripts/updates.sh",
 		"restart-interval": 300,
-		"on-click": "alacritty -e ~/.config/dotfiles/scripts/install_updates.sh",
+		"on-click": "alacritty -e $HOME/.config/dotfiles/scripts/install_updates.sh",
 		"tooltip": false
 	},
-
-	// Keyboard status (caps and num lock)
-	"keyboard-state": {
-		"numlock": true,
-		"capslock": true,
-		"format": "{name} {icon}",
-		"format-icons": {
-			"locked": "",
-			"unlocked": ""
-		}
-	},
-
 
 	"hyprland/mode": {
 		"format": "<span style=\"italic\">{}</span>"
@@ -158,14 +144,6 @@
 	"memory": {
 		"format": "{}% "
 	},
-	"temperature": {
-		// "thermal-zone": 2,
-		// "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
-		"critical-threshold": 80,
-		// "format-critical": "{temperatureC}°C {icon}",
-		"format": "{temperatureC}°C {icon}",
-		"format-icons": ["", "", ""]
-	},
 	"backlight": {
 		// "device": "acpi_video1",
 		"format": "{percent}% {icon}",
@@ -200,13 +178,15 @@
 		"power-saver": ""
 	  }
 	},
+
+	// Network
 	"network": {
-		"format-wifi": "{essid}  ",
+		"format-wifi": "",
 		"format-ethernet": "{ipaddr}/{cidr} ",
-		"tooltip-format": "{ifname}: {gwaddr} ",
+		"tooltip-format": "{essid}",
 		"format-linked": "{ifname} (No IP) ",
 		"format-disconnected": "Disconnected ⚠",
-		"format-alt": "{ifname}: {ipaddr}/{cidr}"
+		"format-alt": "  {essid}"
 	},
 	"pulseaudio": {
 		"scroll-step": 1,
@@ -227,12 +207,28 @@
 		},
 		"on-click": "pavucontrol"
 	},
+	"bluetooth": {
+        "format-disabled": "",
+        "format-off": "",
+        "interval": 30,
+        "on-click": "blueman-manager",
+        "format-no-controller": ""
+    },
 	"custom/bluetooth": {
-		"format": "",
+		"format": " ON",
+		"format-disabled": "",
+        "format-off": " OFF",
+        "interval": 30,
 		"tooltip": false,
-		"on-click": "alacritty -e ~/.config/dotfiles/modules-waybar/wofi-bluetooth.sh"
+		"on-click": "nohup $HOME/.config/dotfiles/modules-waybar/wofi-bluetooth.sh"
  	},
 
+	// Settings menu
+	"custom/settings":
+	{
+		"format" : " ",
+		"on-click": "nohup $HOME/.config/dotfiles/scripts/config-launcher.sh"
+	},
 	// Power Menu
 	"custom/power": {
 		"format" : "⏻ ",

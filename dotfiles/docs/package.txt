@@ -26,6 +26,7 @@
 1wl-clipboard
 1xdg-desktop-portal
 1sdg-desktop-portal-hyprland
+1yq
 0
 0
 0
