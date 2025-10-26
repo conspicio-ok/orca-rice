@@ -1,0 +1,82 @@
+# Maintainer: conspicio-ok
+pkgname=orca-rice
+pkgver=1.0.0
+pkgrel=1
+pkgdesc="Configuration Hyprland, Waybar + installation de paquet utile au quotidien"
+arch=('any')
+url="https://github.com/conspicio-ok/orca-rice"
+license=('custom:CC-BY-NC-SA-4.0')
+depends=(
+    'hyprland'
+    'wayland'
+    'wayland-protocols'
+    'xorg-xwayland'
+    'waybar'
+    'pipewire'
+    'pipewire-pulse'
+    'gst-plugin-pipewire'
+    'libpipewire'
+    'wl-clipboard'
+    'xdg-desktop-portal'
+    'yq'
+    'vim'
+    'firefox'
+    'zsh'
+    'alacritty'
+    'dolphin'
+    'dunst'
+    'grim'
+    'slurp'
+    'bluez-utils'
+    'bluez'
+    'mpd'
+    'ncmpcpp'
+    'openssh'
+    'unzip'
+    'tar'
+    'sshfs'
+    'hyprpaper'
+    'ttf-font-awesome'
+    'ttf-meslo-nerd'
+    'ffmpeg'
+    'exa'
+    'tree'
+    'bat'
+    'lutris'
+    'wine'
+    'wine-mono'
+    'wine-gecko'
+    'winetricks'
+    'lib32-gnutls'
+    'lib32-mpg123'
+    'lib32-v4l-utils'
+    'lib32-libpulse'
+    'lib32-openal'
+    'lib32-libldap'
+    'lib32-libxml2'
+    'lib32-sqlite'
+)
+optdepends=(
+    'ly: Display manager minimaliste pour login graphique'
+    'rofi-wayland: Lanceur d applications pour Wayland'
+    'wildmidi: Synthétiseur MIDI pour ncmpcpp'
+)
+source=("git+${url}.git")
+sha256sums=('SKIP')
+install=${pkgname}.install
+
+package() {
+    cd "${srcdir}/${pkgname}"
+    
+    # Créer le répertoire de destination
+    install -dm755 "${pkgdir}/usr/share/${pkgname}"
+    
+    # Copier les fichiers de configuration
+    cp -r .config "${pkgdir}/usr/share/${pkgname}/"
+    
+    # Installer le script de setup (à créer)
+    # install -Dm755 hypr-rice-setup "${pkgdir}/usr/bin/hypr-rice-setup"
+    
+    # Installer la licence
+    install -Dm644 LICENSE "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE"
+}

@@ -1,0 +1,30 @@
+post_install() {
+    echo ""
+    echo "==> Installation de orca-rice terminée !"
+    echo ""
+    echo "==> Services à activer manuellement :"
+    echo "    sudo systemctl enable --now pipewire"
+    echo "    sudo systemctl enable --now pipewire-pulse"
+    echo "    sudo systemctl enable --now bluetooth"
+    echo "    sudo systemctl enable --now mpd"
+    echo ""
+    echo "==> Configuration utilisateur :"
+    echo "    Les fichiers de configuration sont installés dans :"
+    echo "    /usr/share/orca-rice/.config/"
+    echo ""
+    echo "    Pour les utiliser, créez des liens symboliques :"
+    echo "    ln -sf /usr/share/orca-rice/.config/hypr ~/.config/"
+    echo "    ln -sf /usr/share/orca-rice/.config/waybar ~/.config/"
+    echo "    (et ainsi de suite pour chaque dossier)"
+    echo ""
+    echo "==> Display Manager (optionnel) :"
+    echo "    Pour utiliser ly comme display manager :"
+    echo "    1. Installer : sudo pacman -S ly"
+    echo "    2. Activer : sudo systemctl enable ly"
+    echo "    3. Désactiver votre DM actuel si nécessaire"
+    echo ""
+}
+
+post_upgrade() {
+    post_install
+}
