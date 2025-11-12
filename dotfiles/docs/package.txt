@@ -27,6 +27,7 @@
 1xdg-desktop-portal
 1sdg-desktop-portal-hyprland
 1yq
+1pacman-contrib
 0
 0
 0
@@ -42,6 +43,7 @@
 1dunst
 1grim
 1slurp
+1wlogout
 0
 0
 0
