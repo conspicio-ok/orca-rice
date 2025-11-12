@@ -22,3 +22,15 @@
     "text" : "Reboot",
     "keybind" : "r"
 }
+{
+    "label" : "hibernate",
+    "action" : "hibernate",
+    "text" : "Hibernate",
+    "keybind" : "h"
+}
+{
+    "label" : "suspend",
+    "action" : "suspend",
+    "text" : "Suspend",
+    "keybind" : "n"
+}

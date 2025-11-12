@@ -70,3 +70,15 @@ Buttons
 	border-radius: 20px;
 	background-image: image(url("icons/reboot.png"));
 }
+
+#hibernate {
+	margin: 10px;
+	border-radius: 20px;
+	background-image: image(url("icons/hibernate.png"));
+}
+
+#suspend {
+	margin: 10px;
+	border-radius: 20px;
+	background-image: image(url("icons/suspend.png"));
+}
