@@ -58,6 +58,7 @@
 1openssh
 1unzip
 1tar
+1sshfs
 0
 0
 0

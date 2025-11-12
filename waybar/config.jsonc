@@ -96,7 +96,9 @@
 
 	// Music Player Deamon
 	"mpd": {
-		"format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {album} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S}) ⸨{songPosition}|{queueLength}⸩ {volume}% ",
+		"host": "localhost",
+		"port": 6601,
+		"format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon} {title} {volume}% ",
 		"format-disconnected": "Disconnected ",
 		"format-stopped": "{consumeIcon}{randomIcon}{repeatIcon}{singleIcon} Stopped  ",
 		"unknown-tag": "N/A",
@@ -118,7 +120,7 @@
 			"paused": "",
 			"playing": ""
 		},
-		"tooltip-format": "MPD (connected)",
+		"tooltip-format": "Title  : {artist} - {album}\nTime : ({elapsedTime:%M:%S}/{totalTime:%M:%S})\nPiste : {songPosition}|{queueLength}",
 		"tooltip-format-disconnected": "MPD (disconnected)"
 	},
 	"idle_inhibitor": {
