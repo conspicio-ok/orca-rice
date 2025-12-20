@@ -24,6 +24,7 @@ depends=(
     'zsh'
     'alacritty'
     'dolphin'
+	'udiskie'
     'dunst'
     'grim'
     'slurp'
@@ -42,6 +43,7 @@ depends=(
     'exa'
     'tree'
     'bat'
+	'gamemode'
     'lutris'
     'wine'
     'wine-mono'
@@ -60,6 +62,7 @@ optdepends=(
     'ly: Display manager minimaliste pour login graphique'
     'rofi-wayland: Lanceur d applications pour Wayland'
     'wildmidi: Synthétiseur MIDI pour ncmpcpp'
+	'brightnessctl: Controleur de luminosite (utile sur portable)'
 )
 source=("git+${url}.git")
 sha256sums=('SKIP')

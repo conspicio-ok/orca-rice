@@ -1,0 +1,12 @@
+- name: Hyprland
+  path: ~/.config/hypr/hyprland.conf
+
+- name: Wofi
+  path: ~/.config/wofi/config
+
+- name: Waybar
+  path: ~/.config/waybar/config.jsonc
+
+- name: Alacritty
+  path: ~/.config/alacritty/alacritty.toml
+

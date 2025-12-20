@@ -17,6 +17,7 @@ PS1='\[\e[38;5;108m\]➜\[\e[0m\]  \[\e[1;38;5;214m\]\u\[\e[0m\]:\[\e[1;38;5;117
 
 # Alias
 alias player='ncmpcpp'
+alias ccs='gcc $pkg-config --cflags --libs sdl SDL_image SDL_gfx) -lm -o prog'
 
 # Pipewire
 export PIPEWIRE_RUNTIME_DIR="/run/user/$(id -u)/pipewire-0"
