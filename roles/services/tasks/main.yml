@@ -24,9 +24,13 @@
     scope: user
   loop: "{{ user_services }}"
 
+# ly 1.x ne fournit plus d'unité simple `ly.service` mais des templates
+# `ly@.service` / `ly-kmsconvt@.service` : il faut activer une instance
+# liée à un TTY. tty2 est le choix par défaut sur Arch ; surchargeable
+# par machine via `ly_tty` dans host_vars.
 - name: Activer ly (display manager)
   become: true
   systemd:
-    name: ly
+    name: "ly@{{ ly_tty | default('tty2') }}"
     enabled: true
     state: started
