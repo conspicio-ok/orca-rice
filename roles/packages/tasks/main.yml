@@ -13,16 +13,25 @@
     state: present
   when: pacman_packages_host | default([]) | length > 0
 
-- name: Installer les packages AUR spécifiques à la machine
-  command: "{{ aur_helper }} -S --noconfirm --needed {{ item }}"
-  loop: "{{ aur_packages_host | default([]) }}"
+# Inventaire des paquets installés — sert à filtrer les installations AUR
+# (voir aur.yml). Un seul appel, réutilisé par tous les blocs AUR.
+- name: Lister les paquets déjà installés
+  command: pacman -Qq
+  register: pacman_installed
   changed_when: false
+
+- name: Installer les packages AUR spécifiques à la machine
+  include_tasks: aur.yml
+  vars:
+    aur_list: "{{ aur_packages_host | default([]) }}"
+    aur_label: "machine"
   when: aur_packages_host | default([]) | length > 0
 
 - name: Installer les packages AUR essentiels
-  command: "{{ aur_helper }} -S --noconfirm --needed {{ item }}"
-  loop: "{{ aur_packages_core }}"
-  changed_when: false
+  include_tasks: aur.yml
+  vars:
+    aur_list: "{{ aur_packages_core }}"
+    aur_label: "essentiels"
 
 - name: Installer les packages dev pacman
   become: true
@@ -32,9 +41,10 @@
   when: install_dev | lower == 'yes'
 
 - name: Installer les packages dev AUR
-  command: "{{ aur_helper }} -S --noconfirm --needed {{ item }}"
-  loop: "{{ aur_packages_dev }}"
-  changed_when: false
+  include_tasks: aur.yml
+  vars:
+    aur_list: "{{ aur_packages_dev }}"
+    aur_label: "dev"
   when: install_dev | lower == 'yes'
 
 - name: Installer les packages pacman Android Dev
@@ -45,9 +55,10 @@
   when: install_android_dev | lower == 'yes'
 
 - name: Installer Android Studio (AUR)
-  command: "{{ aur_helper }} -S --noconfirm --needed {{ item }}"
-  loop: "{{ aur_packages_android_dev }}"
-  changed_when: false
+  include_tasks: aur.yml
+  vars:
+    aur_list: "{{ aur_packages_android_dev }}"
+    aur_label: "Android Dev"
   when: install_android_dev | lower == 'yes'
 
 - name: Activer le dépôt multilib pour le gaming
@@ -68,9 +79,10 @@
   when: install_games | lower == 'yes'
 
 - name: Installer les packages gaming AUR
-  command: "{{ aur_helper }} -S --noconfirm --needed {{ item }}"
-  loop: "{{ aur_packages_games }}"
-  changed_when: false
+  include_tasks: aur.yml
+  vars:
+    aur_list: "{{ aur_packages_games }}"
+    aur_label: "gaming"
   when: install_games | lower == 'yes'
 
 - name: Installer les packages virtualisation
@@ -94,4 +106,3 @@
     name: "{{ pacman_packages_creative }}"
     state: present
   when: install_creative | lower == 'yes'
-

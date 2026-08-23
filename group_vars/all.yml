@@ -176,3 +176,17 @@ user_services:
   - pipewire-pulse
   - ssh-agent
 
+
+# ─────────────────────────────────────────────
+#  Canal askpass pour les appels sudo de yay/makepkg
+#  (voir roles/sudo_askpass)
+# ─────────────────────────────────────────────
+# XDG_RUNTIME_DIR = /run/user/<uid> : tmpfs, mode 0700, purgé en fin de session.
+askpass_dir: "{{ ansible_env.XDG_RUNTIME_DIR | default('/run/user/' ~ ansible_user_uid) }}"
+askpass_helper: "{{ askpass_dir }}/ansible-sudo-askpass"
+askpass_secret_file: "{{ askpass_dir }}/ansible-sudo-pw"
+
+# Environnement des tâches AUR : ne porte que le chemin du helper,
+# jamais le mot de passe — rien de sensible dans une ligne de commande.
+aur_env:
+  SUDO_ASKPASS: "{{ askpass_helper }}"

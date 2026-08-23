@@ -1,0 +1,14 @@
+#!/bin/sh
+# Helper askpass pour sudo — généré par Ansible (rôle sudo_askpass).
+# Ne contient AUCUN secret : uniquement le chemin du fichier qui le porte.
+#
+# sudo l'invoque automatiquement lorsqu'aucun terminal n'est disponible
+# (man sudo, ENVIRONMENT / SUDO_ASKPASS) — le cas des tâches Ansible.
+# Sans lui, l'appel sudo interne de yay et de makepkg échoue sur
+# « sudo: a terminal is required to read the password ».
+set -eu
+
+SECRET='{{ askpass_secret_file }}'
+
+[ -r "$SECRET" ] || exit 1
+cat "$SECRET"

@@ -1,0 +1,20 @@
+---
+# Installe une liste de paquets AUR.
+#
+# Attend :
+#   aur_list  — liste des paquets
+#   aur_label — libellé affiché
+#
+# L'installation est filtrée sur les paquets réellement absents
+# (pacman_installed), ce qui rend l'état `changed` fiable : une tâche
+# marquée changed correspond à une installation effective. L'ancien
+# `changed_when: false` masquait aussi bien les changements que les échecs.
+#
+# --sudoloop : yay rafraîchit le ticket sudo en tâche de fond ; sans lui,
+# une compilation dépassant le timeout de 15 min relancerait l'askpass.
+
+- name: "AUR — installer les paquets {{ aur_label }}"
+  command: >-
+    {{ aur_helper }} -S --noconfirm --needed --sudoloop {{ item }}
+  environment: "{{ aur_env }}"
+  loop: "{{ aur_list | difference(pacman_installed.stdout_lines) }}"

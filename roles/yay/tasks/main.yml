@@ -1,7 +1,12 @@
 ---
-# Installe yay ou paru selon l'hôte (variable aur_helper)
+# Installe yay ou paru selon l'hôte (variable aur_helper).
+#
+# makepkg -si appelle `sudo pacman -U` en fin de compilation. Sans TTY,
+# cet appel échoue : il passe par le helper askpass (rôle sudo_askpass,
+# joué avant celui-ci), transmis par la variable SUDO_ASKPASS.
+
 - name: Vérifier si {{ aur_helper }} est déjà installé
-  command: which {{ aur_helper }}
+  shell: command -v {{ aur_helper }}
   register: aur_check
   changed_when: false
   failed_when: false
@@ -26,6 +31,7 @@
   command: makepkg -si --noconfirm
   args:
     chdir: /tmp/{{ aur_helper }}
+  environment: "{{ aur_env }}"
   when: aur_check.rc != 0
 
 - name: Nettoyer le répertoire temporaire

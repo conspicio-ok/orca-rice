@@ -1,0 +1,14 @@
+---
+# Retire le secret et le helper. Appelé en `always` : s'exécute aussi
+# lorsque le play échoue.
+- name: Retirer le secret et le helper askpass
+  file:
+    path: "{{ item }}"
+    state: absent
+  loop:
+    - "{{ askpass_secret_file }}"
+    - "{{ askpass_helper }}"
+
+- name: Invalider le ticket sudo
+  command: sudo -k
+  changed_when: false

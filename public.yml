@@ -4,6 +4,15 @@
   become: false
 
   vars_prompt:
+    # Sert deux usages : le `become` d'Ansible pour les tâches pacman, et le
+    # canal askpass pour les appels sudo internes de yay/makepkg (rôle
+    # sudo_askpass). Un seul prompt, `unsafe` pour qu'un mot de passe
+    # contenant {{ }} ne soit pas interprété comme du Jinja.
+    - name: become_password
+      prompt: "Mot de passe sudo"
+      private: true
+      unsafe: true
+
     - name: install_dev
       prompt: "Installer l'environnement dev (neovim, plugins, parsers) ? [yes/no]"
       default: "no"
@@ -39,11 +48,37 @@
       default: "no"
       private: false
 
-  roles:
-    - role: yay
-    - role: packages
-    - role: dotfiles
-    - role: services
-    - role: shell
-    - role: neovim
-      when: install_dev | lower == 'yes'
+  vars:
+    ansible_become_password: "{{ become_password }}"
+
+  # Les rôles sont joués dans un block/always : le secret déposé par
+  # sudo_askpass est retiré même si le play échoue en cours de route.
+  tasks:
+    - name: Provisioning
+      block:
+        - include_role:
+            name: sudo_askpass
+
+        - include_role:
+            name: yay
+
+        - include_role:
+            name: packages
+
+        - include_role:
+            name: dotfiles
+
+        - include_role:
+            name: services
+
+        - include_role:
+            name: shell
+
+        - include_role:
+            name: neovim
+          when: install_dev | lower == 'yes'
+
+      always:
+        - include_role:
+            name: sudo_askpass
+            tasks_from: cleanup

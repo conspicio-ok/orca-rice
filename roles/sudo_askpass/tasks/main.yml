@@ -1,0 +1,43 @@
+---
+# Met en place le canal askpass utilisé par les appels sudo internes de
+# yay et makepkg. Le secret ne transite par aucune ligne de commande :
+# il est écrit dans un fichier 0600 sous XDG_RUNTIME_DIR (tmpfs, 0700).
+
+- name: Vérifier que le mot de passe sudo a été fourni
+  assert:
+    that:
+      - become_password is defined
+      - become_password | length > 0
+    fail_msg: >-
+      Mot de passe sudo absent. Le playbook le demande via vars_prompt ;
+      en mode non interactif, passer -e become_password=... ou --ask-become-pass.
+
+- name: Vérifier que le répertoire runtime est bien un tmpfs
+  command: "findmnt -no FSTYPE --target {{ askpass_dir }}"
+  register: askpass_fstype
+  changed_when: false
+
+- name: Refuser de déposer le secret ailleurs que sur un tmpfs
+  assert:
+    that: askpass_fstype.stdout | trim == 'tmpfs'
+    fail_msg: >-
+      {{ askpass_dir }} n'est pas un tmpfs ({{ askpass_fstype.stdout | trim }}) —
+      le mot de passe atterrirait sur un support persistant. Interrompu.
+
+- name: Déposer le mot de passe sudo (tmpfs, 0600)
+  copy:
+    content: "{{ become_password }}\n"
+    dest: "{{ askpass_secret_file }}"
+    mode: "0600"
+  no_log: true
+
+- name: Déposer le helper askpass
+  template:
+    src: askpass.sh.j2
+    dest: "{{ askpass_helper }}"
+    mode: "0700"
+
+- name: Valider le mot de passe sudo avant toute compilation
+  command: sudo -A -k true
+  environment: "{{ aur_env }}"
+  changed_when: false
