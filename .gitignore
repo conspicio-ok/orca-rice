@@ -1,10 +1,8 @@
-mpd/log.log
-mpd/state
-Proton
-blender
-discord
-OpenRGB
-obsidian
-todo
-Bitwarden
-mpd/playlists/*
+group_vars/vault.yml
+group_vars/vault.yml.example
+init-vault.sh
+roles/hetzner
+private.yml
+
+# Fragment sway généré par ansible — machine-local, jamais versionné
+dotfiles/sway/config.d/

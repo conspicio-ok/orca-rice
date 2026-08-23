@@ -1,0 +1,64 @@
+---
+# ─── Plugins ─────────────────────────────────────────────────
+- name: Cloner nvim-tree.lua
+  git:
+    repo: https://github.com/nvim-tree/nvim-tree.lua
+    dest: "{{ user_home }}/.local/share/nvim/site/pack/plugins/start/nvim-tree.lua"
+    update: false
+
+- name: Cloner plenary.nvim
+  git:
+    repo: https://github.com/nvim-lua/plenary.nvim
+    dest: "{{ user_home }}/.local/share/nvim/site/pack/plugins/start/plenary.nvim"
+    update: false
+
+- name: Cloner gitgraph.nvim
+  git:
+    repo: https://github.com/isakbm/gitgraph.nvim
+    dest: "{{ user_home }}/.local/share/nvim/site/pack/plugins/start/gitgraph.nvim"
+    update: false
+
+# ─── nvim-treesitter ─────────────────────────────────────────
+- name: Cloner nvim-treesitter
+  git:
+    repo: https://github.com/nvim-treesitter/nvim-treesitter
+    dest: "{{ user_home }}/.local/share/nvim/site/pack/plugins/start/nvim-treesitter"
+    update: false
+
+- name: Installer parsers treesitter core
+  command: >
+    nvim --headless
+    -c "TSInstall! lua bash json yaml toml markdown html"
+    -c "sleep 120" -c "qa"
+  args:
+    creates: "{{ user_home }}/.local/share/nvim/site/parser/lua.so"
+
+- name: Installer parsers treesitter web
+  command: >
+    nvim --headless
+    -c "TSInstall! svelte css javascript typescript"
+    -c "sleep 90" -c "qa"
+  args:
+    creates: "{{ user_home }}/.local/share/nvim/site/parser/svelte.so"
+  when: install_ts_web | default('no') | lower == 'yes'
+
+- name: Installer parsers treesitter Go
+  command: nvim --headless -c "TSInstall! go" -c "sleep 60" -c "qa"
+  args:
+    creates: "{{ user_home }}/.local/share/nvim/site/parser/go.so"
+  when: install_ts_go | default('no') | lower == 'yes'
+
+# Le scope user de systemd exige ce répertoire pour y poser les units.
+- name: Créer ~/.config/systemd/user
+  file:
+    path: "{{ user_home }}/.config/systemd/user"
+    state: directory
+    mode: '0755'
+
+- name: Activer le timer nvim-treesitter-update
+  systemd:
+    name: nvim-treesitter-update.timer
+    scope: user
+    enabled: true
+    state: started
+    daemon_reload: true

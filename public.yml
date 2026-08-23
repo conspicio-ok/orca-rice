@@ -1,0 +1,49 @@
+---
+- name: Setup système
+  hosts: local
+  become: false
+
+  vars_prompt:
+    - name: install_dev
+      prompt: "Installer l'environnement dev (neovim, plugins, parsers) ? [yes/no]"
+      default: "no"
+      private: false
+
+    - name: install_android_dev
+      prompt: "Installer Android Studio + outils Android ? [yes/no]"
+      default: "no"
+      private: false
+
+    - name: install_games
+      prompt: "Installer les packages gaming (Steam, Lutris, Wine, ...) ? [yes/no]"
+      default: "no"
+      private: false
+
+    - name: install_virt
+      prompt: "Installer la virtualisation (virt-manager, QEMU) ? [yes/no]"
+      default: "no"
+      private: false
+
+    - name: install_creative
+      prompt: "Installer les outils créatifs (Blender, Krita, CUDA) ? [yes/no]"
+      default: "no"
+      private: false
+
+    - name: install_ts_web
+      prompt: "Parsers treesitter web (svelte, css, js, ts) ? [yes/no]"
+      default: "no"
+      private: false
+
+    - name: install_ts_go
+      prompt: "Parsers treesitter Go ? [yes/no]"
+      default: "no"
+      private: false
+
+  roles:
+    - role: yay
+    - role: packages
+    - role: dotfiles
+    - role: services
+    - role: shell
+    - role: neovim
+      when: install_dev | lower == 'yes'

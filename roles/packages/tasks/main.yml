@@ -1,0 +1,97 @@
+---
+- name: Installer les packages pacman essentiels
+  become: true
+  pacman:
+    name: "{{ pacman_packages_core }}"
+    state: present
+    update_cache: true
+
+- name: Installer les packages pacman spécifiques à la machine
+  become: true
+  pacman:
+    name: "{{ pacman_packages_host | default([]) }}"
+    state: present
+  when: pacman_packages_host | default([]) | length > 0
+
+- name: Installer les packages AUR spécifiques à la machine
+  command: "{{ aur_helper }} -S --noconfirm --needed {{ item }}"
+  loop: "{{ aur_packages_host | default([]) }}"
+  changed_when: false
+  when: aur_packages_host | default([]) | length > 0
+
+- name: Installer les packages AUR essentiels
+  command: "{{ aur_helper }} -S --noconfirm --needed {{ item }}"
+  loop: "{{ aur_packages_core }}"
+  changed_when: false
+
+- name: Installer les packages dev pacman
+  become: true
+  pacman:
+    name: "{{ pacman_packages_dev }}"
+    state: present
+  when: install_dev | lower == 'yes'
+
+- name: Installer les packages dev AUR
+  command: "{{ aur_helper }} -S --noconfirm --needed {{ item }}"
+  loop: "{{ aur_packages_dev }}"
+  changed_when: false
+  when: install_dev | lower == 'yes'
+
+- name: Installer les packages pacman Android Dev
+  become: true
+  pacman:
+    name: "{{ pacman_packages_android_dev }}"
+    state: present
+  when: install_android_dev | lower == 'yes'
+
+- name: Installer Android Studio (AUR)
+  command: "{{ aur_helper }} -S --noconfirm --needed {{ item }}"
+  loop: "{{ aur_packages_android_dev }}"
+  changed_when: false
+  when: install_android_dev | lower == 'yes'
+
+- name: Activer le dépôt multilib pour le gaming
+  become: true
+  ini_file:
+    path: /etc/pacman.conf
+    section: multilib
+    option: Include
+    value: /etc/pacman.d/mirrorlist
+  when: install_games | lower == 'yes'
+
+- name: Installer les packages gaming pacman
+  become: true
+  pacman:
+    name: "{{ pacman_packages_games }}"
+    state: present
+    update_cache: true
+  when: install_games | lower == 'yes'
+
+- name: Installer les packages gaming AUR
+  command: "{{ aur_helper }} -S --noconfirm --needed {{ item }}"
+  loop: "{{ aur_packages_games }}"
+  changed_when: false
+  when: install_games | lower == 'yes'
+
+- name: Installer les packages virtualisation
+  become: true
+  pacman:
+    name: "{{ pacman_packages_virt }}"
+    state: present
+  when: install_virt | lower == 'yes'
+
+- name: Ajouter l'utilisateur au groupe libvirt
+  become: true
+  user:
+    name: "{{ ansible_user }}"
+    groups: libvirt
+    append: true
+  when: install_virt | lower == 'yes'
+
+- name: Installer les packages créatifs
+  become: true
+  pacman:
+    name: "{{ pacman_packages_creative }}"
+    state: present
+  when: install_creative | lower == 'yes'
+

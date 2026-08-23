@@ -1,0 +1,47 @@
+# Agent SSH
+export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+ssh-add ~/.ssh/id_ed25519 2>/dev/null
+ssh-add ~/.ssh/id_git 2>/dev/null
+ssh-add ~/.ssh/id_serv 2>/dev/null
+
+# Completion
+autoload -Uz compinit && compinit
+
+# Historique — partagé entre sessions et terminaux
+HISTFILE=~/.zsh_history
+HISTSIZE=10000
+SAVEHIST=10000
+setopt SHARE_HISTORY
+setopt HIST_IGNORE_DUPS
+setopt HIST_IGNORE_SPACE
+
+# Prompt
+setopt PROMPT_SUBST
+
+parse_git_branch() {
+  git rev-parse --is-inside-work-tree &>/dev/null || return
+  local branch
+  branch=$(git symbolic-ref --short HEAD 2>/dev/null || git rev-parse --short HEAD 2>/dev/null)
+  [[ -n $branch ]] && echo "git($branch)"
+}
+
+bindkey "\e[1;3D" backward-word
+bindkey "\e[1;3C" forward-word
+
+PROMPT='%F{108}➜%f  %B%F{214}%n%f%b:%B%F{117}%~%f%b  %B%F{215}$(parse_git_branch)%f%b%B%F{174}>%f%b '
+
+# Alias
+alias ls='eza --icons --group-directories-first --grid'
+alias bios_enter='sudo systemctl reboot --firmware-setup'
+
+# Pipewire
+export PIPEWIRE_RUNTIME_DIR="/run/user/$(id -u)/pipewire-0"
+
+# Android SDK
+export ANDROID_HOME=$HOME/Android/Sdk
+export PATH=$PATH:$ANDROID_HOME/emulator
+export PATH=$PATH:$ANDROID_HOME/platform-tools
+export PATH=$PATH:$ANDROID_HOME/tools
+export PATH=$PATH:$ANDROID_HOME/tools/bin
+
+export PATH="$(npm config get prefix)/bin:$PATH"

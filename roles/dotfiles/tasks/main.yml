@@ -1,0 +1,63 @@
+---
+- name: Créer le symlink .zshrc
+  file:
+    src: "{{ playbook_dir }}/dotfiles/zsh/zshrc"
+    dest: "{{ user_home }}/.zshrc"
+    state: link
+    force: true
+
+- name: Liste des dotfiles déployés depuis ce repo
+  set_fact:
+    ansible_dotfiles:
+      - waybar
+      - sway
+      - foot
+
+- name: Stat des cibles dans ~/.config
+  stat:
+    path: "{{ user_home }}/.config/{{ item }}"
+  loop: "{{ ansible_dotfiles }}"
+  register: dotfiles_targets
+
+- name: Créer l'arborescence de sauvegarde dans ~/.config.bak
+  file:
+    path: "{{ user_home }}/.config.bak/{{ item.item | dirname }}"
+    state: directory
+    mode: '0755'
+  loop: "{{ dotfiles_targets.results }}"
+  loop_control:
+    label: "{{ item.item }}"
+  when:
+    - item.stat.exists
+    - not item.stat.islnk
+
+- name: Sauvegarder la config existante dans ~/.config.bak
+  command: mv "{{ user_home }}/.config/{{ item.item }}" "{{ user_home }}/.config.bak/{{ item.item }}"
+  args:
+    creates: "{{ user_home }}/.config.bak/{{ item.item }}"
+  loop: "{{ dotfiles_targets.results }}"
+  loop_control:
+    label: "{{ item.item }}"
+  when:
+    - item.stat.exists
+    - not item.stat.islnk
+
+- name: Déployer les dotfiles depuis ce repo
+  file:
+    src: "{{ playbook_dir }}/dotfiles/{{ item }}"
+    dest: "{{ user_home }}/.config/{{ item }}"
+    state: link
+    force: true
+  loop: "{{ ansible_dotfiles }}"
+
+- name: Créer le dossier config.d de sway
+  file:
+    path: "{{ playbook_dir }}/dotfiles/sway/config.d"
+    state: directory
+    mode: '0755'
+
+- name: Générer le fragment sway machine-local
+  template:
+    src: sway-local.j2
+    dest: "{{ playbook_dir }}/dotfiles/sway/config.d/local"
+    mode: '0644'

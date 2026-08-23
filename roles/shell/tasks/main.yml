@@ -1,0 +1,45 @@
+---
+- name: Définir zsh comme shell par défaut
+  become: true
+  user:
+    name: "{{ user_name }}"
+    shell: /bin/zsh
+
+- name: Symlink .zshrc utilisateur pour root
+  become: true
+  file:
+    src: "/home/{{ user_name }}/.zshrc"
+    dest: /root/.zshrc
+    state: link
+    force: true
+
+- name: Créer /root/.config
+  become: true
+  file:
+    path: /root/.config
+    state: directory
+    mode: '0700'
+
+- name: Symlink config nvim pour root
+  become: true
+  file:
+    src: "/home/{{ user_name }}/.config/nvim"
+    dest: /root/.config/nvim
+    state: link
+    force: true
+
+- name: Déployer /usr/local/bin/nv
+  become: true
+  copy:
+    dest: /usr/local/bin/nv
+    mode: '0755'
+    content: |
+      #!/bin/sh
+      exec nvim "$@"
+
+- name: Ajouter l'utilisateur aux groupes utiles
+  become: true
+  user:
+    name: "{{ user_name }}"
+    groups: "{{ user_groups }}"
+    append: true

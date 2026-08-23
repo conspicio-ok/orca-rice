@@ -1,0 +1,32 @@
+# -----------------------
+# Écran (local à la machine)
+# -----------------------
+{% if sway_output | default('') %}
+{{ sway_output }}
+{% else %}
+# Pour forcer résolution/position/scale, définir sway_output dans host_vars/<hôte>.yml :
+#   sway_output: "output eDP-1 resolution 1366x768 position 0,0 scale 1"
+{% endif %}
+
+# -----------------------
+# Clavier ({{ sway_keyboard_layout | default('us') }}) — matche tous les claviers
+# -----------------------
+input type:keyboard {
+    xkb_layout {{ sway_keyboard_layout | default('us') }}
+    xkb_options terminate:ctrl_alt_bksp
+    repeat_delay {{ sway_key_repeat_delay | default(300) }}
+    repeat_rate {{ sway_key_repeat_rate | default(50) }}
+}
+{% if sway_touchpad | default(false) %}
+
+# -----------------------
+# Touchpad (optionnel) — matche tous les touchpads
+# -----------------------
+input type:touchpad {
+    tap enabled
+    natural_scroll enabled
+    middle_emulation enabled
+    scroll_method two_finger
+    dwt enabled
+}
+{% endif %}

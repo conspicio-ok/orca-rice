@@ -1,0 +1,201 @@
+# ========================
+# Sway - Config partagée (commune à toutes les machines)
+# Les réglages propres à la machine (output, input) sont dans
+# config.d/local, généré par ansible depuis host_vars.
+# ========================
+
+# -----------------------
+# Modificateur principal
+# -----------------------
+set $mod Mod4
+
+# -----------------------
+# Applications
+# -----------------------
+set $term foot
+set $menu rofi -show drun
+set $lock swaylock -f -c 1e1e2e
+
+# -----------------------
+# Réglages machine-spécifiques (output, input)
+# Généré par ansible — non versionné
+# -----------------------
+include ~/.config/sway/config.d/local
+
+# -----------------------
+# Fond d'ecran (couleur unie, remplace par ton chemin si tu as une image)
+# -----------------------
+output * bg ~/.sway/wallpaper-bg.jpg fill
+
+# -----------------------
+# Apparence
+# -----------------------
+default_border pixel 2
+default_floating_border pixel 2
+gaps inner 8
+gaps outer 4
+smart_gaps off
+smart_borders on
+corner_radius 4
+
+# Couleurs des bordures
+# classe				 bordure  fond	 texte	indicateur enfant
+client.focused		   #89b4fa  #1e1e2e  #cdd6f4  #89b4fa	#89b4fa
+client.unfocused		 #313244  #1e1e2e  #6c7086  #313244	#313244
+client.focused_inactive  #45475a  #1e1e2e  #cdd6f4  #45475a	#45475a
+client.urgent			#f38ba8  #1e1e2e  #cdd6f4  #f38ba8	#f38ba8
+
+# Police
+font pango:monospace 10
+
+# -----------------------
+# Applications de démarrage
+# -----------------------
+exec systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP DISPLAY
+exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP DISPLAY
+exec_always autotiling-rs
+exec_always "pkill waybar; waybar"
+
+# -----------------------
+# Raccourcis de base
+# -----------------------
+
+# Terminal
+bindsym $mod+Return exec $term
+
+# Lanceur d'applications
+bindsym $mod+d exec $menu
+
+# Fermer une fenetre
+bindsym $mod+Shift+q kill
+bindsym $mod+Backspace kill
+bindsym $mod+Shift+b exec foot -e bluetuith
+bindsym $mod+Shift+n exec foot -e impala
+
+# Recharger la config sway
+bindsym $mod+Shift+c reload
+
+# Quitter sway
+bindsym $mod+Shift+e exec swaymsg exit
+
+# -----------------------
+# Navigation entre fenetres
+# -----------------------
+bindsym $mod+Left  focus left
+bindsym $mod+Down  focus down
+bindsym $mod+Up	focus up
+bindsym $mod+Right focus right
+
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+
+# -----------------------
+# Deplacer les fenetres
+# -----------------------
+bindsym $mod+Shift+Left  move left
+bindsym $mod+Shift+Down  move down
+bindsym $mod+Shift+Up	move up
+bindsym $mod+Shift+Right move right
+
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+
+# -----------------------
+# Deplacement souris
+# -----------------------
+# $mod + clic gauche : deplacer / clic droit : redimensionner
+floating_modifier $mod normal
+# Glisser-deposer des fenetres tuilees (reorganisation du tiling)
+tiling_drag enable
+
+# -----------------------
+# Layouts
+# -----------------------
+bindsym $mod+b splith
+bindsym $mod+v splitv
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+bindsym $mod+f fullscreen
+bindsym $mod+Shift+space floating toggle
+bindsym $mod+space focus mode_toggle
+
+# -----------------------
+# Workspaces (1 a 9)
+# -----------------------
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
+bindsym $mod+9 workspace $ws9
+
+bindsym $mod+Shift+1 move container to workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6
+bindsym $mod+Shift+7 move container to workspace $ws7
+bindsym $mod+Shift+8 move container to workspace $ws8
+bindsym $mod+Shift+9 move container to workspace $ws9
+
+# -----------------------
+# Redimensionner
+# -----------------------
+mode "resize" {
+	bindsym Left  resize shrink width  10px
+	bindsym Down  resize grow   height 10px
+	bindsym Up	resize shrink height 10px
+	bindsym Right resize grow   width  10px
+
+	bindsym h resize shrink width  10px
+	bindsym j resize grow   height 10px
+	bindsym k resize shrink height 10px
+	bindsym l resize grow   width  10px
+
+	bindsym Return mode "default"
+	bindsym Escape mode "default"
+}
+bindsym $mod+r mode "resize"
+
+# -----------------------
+# Touches media (laptop)
+# -----------------------
+bindsym XF86AudioRaiseVolume  exec pactl set-sink-volume @DEFAULT_SINK@ +5%
+bindsym XF86AudioLowerVolume  exec pactl set-sink-volume @DEFAULT_SINK@ -5%
+bindsym XF86AudioMute		 exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindsym XF86MonBrightnessUp   exec brightnessctl set +10%
+bindsym XF86MonBrightnessDown exec brightnessctl set 10%-
+
+# -----------------------
+# Capture d'ecran
+# -----------------------
+bindsym $mod+Shift+s exec grim -g "$(slurp)" - | wl-copy
+bindsym $mod+Shift+f exec grim - | wl-copy
+
+# -----------------------
+# Idle / verrouillage
+# -----------------------
+exec swayidle -w \
+	timeout 900 '$lock' \
+	timeout 1600 'swaymsg "output * power off"' \
+	resume 'swaymsg "output * power on"' \
+	before-sleep '$lock'

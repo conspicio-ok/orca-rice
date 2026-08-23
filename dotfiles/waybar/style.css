@@ -1,0 +1,130 @@
+/* -----------------------------------------------------
+ * Waybar — config autonome (dérivée ML4W, desync)
+ * ----------------------------------------------------- */
+
+@define-color text        #cfcfcf;
+@define-color textdim     #808080;
+@define-color textbright  #ebebeb;
+
+/* General ------------------------------------------------ */
+
+* {
+    font-family: "Fira Sans Semibold", "Font Awesome 7 Free", "Font Awesome 7 Brands", FontAwesome, sans-serif;
+    font-size: 16px;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    text-shadow: none;
+    min-height: 0;
+}
+
+window#waybar {
+    background-color: rgba(60,60,60,0.2);
+    border-radius: 12px;
+    transition-property: background-color;
+    transition-duration: .5s;
+}
+
+/* Workspaces -------------------------------------------- */
+
+#workspaces {
+    background: transparent;
+    margin: 2px 8px 3px 1px;
+    padding: 0px 2px;
+    font-weight: bold;
+    color: @textdim;
+}
+
+#workspaces button {
+    padding: 0px 6px;
+    margin: 3px 2px;
+    background: transparent;
+    color: @textdim;
+}
+
+#workspaces button.focused {
+    color: @textbright;
+}
+
+#workspaces button:hover {
+    background: transparent;
+    color: @textdim;
+}
+
+/* Modules ----------------------------------------------- */
+
+#clock,
+#pulseaudio,
+#network,
+#backlight,
+#battery,
+#bluetooth, #custom-bluetooth,
+#power-profiles-daemon,
+#custom-updates,
+#custom-settings,
+#custom-power {
+    background: transparent;
+    color: @text;
+    margin: 3px 6px 3px 0px;
+    padding: 0px;
+}
+
+#pulseaudio,
+#network,
+#backlight,
+#battery,
+#bluetooth, #custom-bluetooth,
+#power-profiles-daemon,
+#custom-settings,
+#custom-power {
+    padding: 0px 6px;
+}
+
+#tray {
+    margin: 3px 6px 3px 0px;
+}
+
+#tray > .passive {
+    -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+    -gtk-icon-effect: highlight;
+}
+
+/* États informatifs ------------------------------------- */
+
+#pulseaudio.muted {
+    color: @textdim;
+}
+
+#bluetooth.off {
+    margin: 0px;
+    padding: 0px;
+}
+
+/* Alertes ----------------------------------------------- */
+
+#custom-updates.yellow {
+    color: #ff9a3c;
+}
+
+#custom-updates.red {
+    color: #dc2f2f;
+}
+
+#battery.critical:not(.charging) {
+    color: #f53c3c;
+}
+
+/* Tooltips ---------------------------------------------- */
+
+tooltip {
+    background-color: rgba(30,30,30,0.95);
+    border-radius: 12px;
+    padding: 12px;
+}
+
+tooltip label {
+    color: @text;
+}

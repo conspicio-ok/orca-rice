@@ -1,0 +1,178 @@
+---
+user_name: conspicio
+user_home: /home/conspicio
+dotfiles_repo: git@github.com:conspicio-ok/orca-rice.git
+
+pacman_packages_core:
+  # Système / WM
+  - base-devel
+  - xorg-xwayland
+  - wayland-protocols
+  - xdg-desktop-portal-wlr
+  - swayidle
+  - swaylock
+  - waybar
+  - ly
+  - zsh
+  - foot
+  - autotiling-rs
+  # Audio
+  - pipewire
+  - pipewire-alsa
+  - pipewire-jack
+  - pipewire-pulse
+  - wireplumber
+  - gst-plugin-pipewire
+  - libpulse
+  # Bluetooth
+  - bluez
+  - bluez-utils
+  # Fonts
+  - ttf-meslo-nerd
+  - ttf-jetbrains-mono-nerd
+  - woff2-font-awesome
+  # Compositor utils
+  - wl-clipboard
+  - grim
+  - slurp
+  - feh
+  - wf-recorder
+  - udiskie
+  # Notifications / launcher
+  - dunst
+  - rofi
+  # File manager
+  - dolphin
+  # Terminal utils
+  - git
+  - htop
+  - bat
+  - eza
+  - tree
+  - unzip
+  - zip
+  - rsync
+  - openssh
+  - sshfs
+  - pacman-contrib
+  # Navigateur / apps
+  - firefox
+  - vim
+  - code
+  - discord
+  - obsidian
+  - bitwarden
+  - libreoffice-fresh
+  # Réseau
+  - iwd
+  - impala
+  - nethogs
+  # Périphériques
+  - solaar
+  - i2c-tools
+  # Système
+  - btrfs-progs
+  - zram-generator
+  - syncthing
+  - realtime-privileges
+  - rtkit
+  # Dev
+  - go
+  - nodejs
+  - npm
+  - docker
+  - docker-compose
+  # Autres
+  - obs-studio
+  - evtest
+  - dmidecode
+
+# ─────────────────────────────────────────────
+#  Packages AUR — toujours installés
+# ─────────────────────────────────────────────
+aur_packages_core:
+  - swayfx
+  - bluetuith
+  - wlogout
+  - xpad-dkms-git
+  - parsec-bin
+  - proton-vpn-gtk-app
+
+# ─────────────────────────────────────────────
+#  Packages optionnels (activés via vars_prompt)
+# ─────────────────────────────────────────────
+pacman_packages_dev:
+  - neovim
+
+aur_packages_dev:
+  - tree-sitter-cli
+
+pacman_packages_android_dev:
+  - android-tools
+
+aur_packages_android_dev:
+  - android-studio
+
+pacman_packages_games:
+  - steam
+  - lutris
+  - wine
+  - wine-mono
+  - wine-gecko
+  - winetricks
+  - gamemode
+  - lib32-gnutls
+  - lib32-mpg123
+  - lib32-libpulse
+  - lib32-openal
+
+aur_packages_games:
+  - minecraft-launcher
+  - prismlauncher
+
+pacman_packages_virt:
+  - virt-manager
+  - virt-viewer
+  - qemu-desktop
+  - qemu-full
+  - dnsmasq
+  - iptables
+
+pacman_packages_creative:
+  - blender
+  - krita
+  - cuda
+
+# ─────────────────────────────────────────────
+#  Services systemd système
+# ─────────────────────────────────────────────
+system_services:
+  - bluetooth
+  - docker
+  - iwd
+  - rtkit-daemon
+  - systemd-networkd
+  - systemd-resolved
+
+system_services_virt:
+  - libvirtd
+
+# ─────────────────────────────────────────────
+#  Groupes utilisateur
+# ─────────────────────────────────────────────
+user_groups:
+  - docker
+  - realtime
+  - i2c
+  - input
+  - video
+
+# ─────────────────────────────────────────────
+#  Services systemd user
+# ─────────────────────────────────────────────
+user_services:
+  - pipewire
+  - wireplumber
+  - pipewire-pulse
+  - ssh-agent
+

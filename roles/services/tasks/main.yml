@@ -1,0 +1,32 @@
+---
+- name: Activer et démarrer les services système
+  become: true
+  systemd:
+    name: "{{ item }}"
+    enabled: true
+    state: started
+  loop: "{{ system_services }}"
+
+- name: Activer libvirtd si virtualisation choisie
+  become: true
+  systemd:
+    name: "{{ item }}"
+    enabled: true
+    state: started
+  loop: "{{ system_services_virt }}"
+  when: install_virt | default('no') | lower == 'yes'
+
+- name: Activer et démarrer les services utilisateur
+  systemd:
+    name: "{{ item }}"
+    enabled: true
+    state: started
+    scope: user
+  loop: "{{ user_services }}"
+
+- name: Activer ly (display manager)
+  become: true
+  systemd:
+    name: ly
+    enabled: true
+    state: started

@@ -1,0 +1,8 @@
+---
+pacman_packages_host: []
+
+aur_packages_host: []
+
+sway_keyboard_layout: us
+sway_touchpad: true
+

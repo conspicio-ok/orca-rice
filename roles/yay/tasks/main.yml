@@ -1,0 +1,35 @@
+---
+# Installe yay ou paru selon l'hôte (variable aur_helper)
+- name: Vérifier si {{ aur_helper }} est déjà installé
+  command: which {{ aur_helper }}
+  register: aur_check
+  changed_when: false
+  failed_when: false
+
+- name: Installer les dépendances pour compiler l'AUR helper
+  become: true
+  pacman:
+    name:
+      - git
+      - base-devel
+    state: present
+  when: aur_check.rc != 0
+
+- name: Cloner le dépôt {{ aur_helper }}
+  git:
+    repo: https://aur.archlinux.org/{{ aur_helper }}.git
+    dest: /tmp/{{ aur_helper }}
+    depth: 1
+  when: aur_check.rc != 0
+
+- name: Compiler et installer {{ aur_helper }}
+  command: makepkg -si --noconfirm
+  args:
+    chdir: /tmp/{{ aur_helper }}
+  when: aur_check.rc != 0
+
+- name: Nettoyer le répertoire temporaire
+  file:
+    path: /tmp/{{ aur_helper }}
+    state: absent
+  when: aur_check.rc != 0
