@@ -16,16 +16,17 @@ cd .ansible
 
 Sur desktop :
 ```bash
-ansible-playbook -i inventory.ini public.yml -K --limit desktop
+ansible-playbook -i inventory.ini public.yml --limit desktop
 ```
 Sur laptop :
 ```bash
-ansible-playbook -i inventory.ini public.yml -K --limit laptop
+ansible-playbook -i inventory.ini public.yml --limit laptop
 ```
 
 ### Options interactives (`public.yml`)
 
-Chaque groupe est proposé au lancement, défaut `no` :
+Le mot de passe sudo est demandé en premier, puis chaque groupe ci-dessous,
+défaut `no` :
 
 | Prompt | Contenu |
 |---|---|
@@ -53,7 +54,7 @@ dotfiles/
   foot/                    config foot
   zsh/                     zshrc — symlinké vers ~/.zshrc
 roles/
-  yay packages dotfiles services shell neovim
+  sudo_askpass yay packages dotfiles services shell neovim
 ```
 
 ## Inventaire et variables par machine
@@ -77,6 +78,7 @@ telle quelle.
 
 | Rôle | Effet |
 |---|---|
+| `sudo_askpass` | ouvre le canal sudo utilisé par yay et makepkg, retiré en fin de run |
 | `yay` | installe l'AUR helper depuis les sources si absent |
 | `packages` | paquets pacman/AUR — core, machine, groupes optionnels ; active `multilib` si gaming |
 | `dotfiles` | symlinks des apps migrées, `~/.zshrc`, config SSH, fragment sway |
