@@ -1,0 +1,203 @@
+/* gtklock — lockscreen
+ *
+ * Structure du widget (gtklock.ui, GTK3) :
+ *   window > #window-box > #info-box > #time-box > #clock-label, #date-label
+ *                        > body-revealer > #body-grid > #input-label, #input-field,
+ *                                                       #warning-label, #error-label,
+ *                                                       #unlock-button
+ *
+ * gtklock affiche la meme fenetre sur chaque sortie. Celle qui a le focus porte
+ * la classe .focused et revele le formulaire ; les autres n'affichent que l'heure.
+ * Le CSS interne reduit #clock-label a 32pt sur la sortie focus : on l'annule
+ * pour garder une grande horloge au-dessus du champ.
+ */
+
+window {
+	background-color: #000000;
+	background-image: url("/home/conspicio/.background.jpg");
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+
+	color: #e8e8e8;
+	font-family: "Fira Sans", sans-serif;
+}
+
+/* Horloge */
+
+window #clock-label,
+window.focused:not(.hidden) #clock-label {
+	font-size: 76pt;
+	font-weight: 300;
+	color: #f2f2f2;
+	margin-bottom: -10px;
+}
+
+window #date-label,
+window.focused:not(.hidden) #date-label {
+	font-size: 13pt;
+	font-weight: 400;
+	color: #d8d8d8;
+}
+
+/* Formulaire */
+
+#window-box {
+	margin: 0;
+}
+
+#body-grid {
+	margin-top: 18px;
+}
+
+/* Libelle "Password:" et bouton Unlock : la touche Entree suffit */
+#input-label,
+#unlock-button {
+	opacity: 0;
+	min-width: 0;
+	min-height: 0;
+	margin: 0;
+	padding: 0;
+	border: none;
+	font-size: 0;
+}
+
+#input-field {
+	min-height: 38px;
+	padding: 0 16px;
+	border: none;
+	border-radius: 19px;
+	box-shadow: none;
+	caret-color: #f2f2f2;
+	color: #f2f2f2;
+	font-size: 12pt;
+	background-image: none;
+	background-color: rgba(255, 255, 255, 0.14);
+}
+
+#input-field:focus {
+	background-color: rgba(255, 255, 255, 0.20);
+	outline: none;
+}
+
+/* Icone oeil (view-reveal-symbolic) portee par l'entry */
+#input-field image {
+	color: #cfcfcf;
+	margin-right: 2px;
+}
+
+#error-label {
+	color: #ff8080;
+	font-size: 10pt;
+}
+
+#warning-label {
+	color: #ffd080;
+	font-size: 10pt;
+}
+
+/* Powerbar (gtklock-powerbar-module)
+ *
+ * Le module pose un GtkRevealer #powerbar-revealer en overlay de la fenetre,
+ * contenant un GtkButtonBox #powerbar-box aligne en bas au centre.
+ * Boutons : #poweroff-button, #reboot-button, #suspend-button,
+ *           #userswitch-button, #logout-button (ces deux derniers n'apparaissent
+ *           que si userswitch-command / logout-command sont definis).
+ * Les icones sont symboliques : leur couleur suit `color`.
+ */
+
+#powerbar-box {
+	margin-bottom: 24px;
+}
+
+#powerbar-box button {
+	min-width: 30px;
+	min-height: 26px;
+	padding: 2px 6px;
+	margin: 0 3px;
+	border: none;
+	border-radius: 6px;
+	box-shadow: none;
+	background-image: none;
+	background-color: rgba(255, 255, 255, 0.10);
+	color: #e0e0e0;
+}
+
+#powerbar-box button:hover {
+	background-color: rgba(255, 255, 255, 0.22);
+}
+
+#powerbar-box button:active,
+#powerbar-box button:checked {
+	background-color: rgba(255, 255, 255, 0.30);
+}
+
+/* Media (gtklock-playerctl-module)
+ *
+ * GtkRevealer #playerctl-revealer > GtkBox #playerctl-box, contenant
+ * #album-art (GtkImage), #title-label (markup gras), #artist-label,
+ * #album-label, et les boutons #previous-button, #play-pause-button,
+ * #next-button. Avec position=under-clock, le bloc est insere dans
+ * #window-box sous #date-label.
+ */
+
+#playerctl-box {
+	margin-top: 14px;
+	padding: 10px 14px;
+	border-radius: 12px;
+	background-color: rgba(0, 0, 0, 0.28);
+}
+
+#album-art {
+	border-radius: 8px;
+	margin-right: 12px;
+}
+
+#title-label {
+	font-size: 11pt;
+	color: #f2f2f2;
+}
+
+#artist-label {
+	font-size: 10pt;
+	color: #c8c8c8;
+}
+
+#album-label {
+	font-size: 9pt;
+	color: #9a9a9a;
+}
+
+#playerctl-box button {
+	min-width: 28px;
+	min-height: 28px;
+	padding: 0;
+	margin: 0 2px;
+	border: none;
+	border-radius: 14px;
+	box-shadow: none;
+	background-image: none;
+	background-color: transparent;
+	color: #e0e0e0;
+}
+
+#playerctl-box button:hover {
+	background-color: rgba(255, 255, 255, 0.18);
+}
+
+#playerctl-box button:disabled {
+	color: rgba(224, 224, 224, 0.35);
+}
+
+/* Sans gtk-theme=Adwaita-dark, le thema par defaut (Adwaita clair) fournit les
+ * couleurs non redefinies ci-dessus. On fixe explicitement celles qui restaient
+ * a sa charge. */
+
+#input-field selection {
+	background-color: rgba(255, 255, 255, 0.30);
+	color: #ffffff;
+}
+
+#message-box label {
+	color: #e0e0e0;
+}

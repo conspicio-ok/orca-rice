@@ -14,7 +14,7 @@ set $mod Mod4
 # -----------------------
 set $term foot
 set $menu rofi -show drun
-set $lock swaylock -f -c 1e1e2e
+set $lock gtklock -d
 
 # -----------------------
 # Réglages machine-spécifiques (output, input)
@@ -23,9 +23,9 @@ set $lock swaylock -f -c 1e1e2e
 include ~/.config/sway/config.d/local
 
 # -----------------------
-# Fond d'ecran (couleur unie, remplace par ton chemin si tu as une image)
+# Fond d'ecran — ~/.background.jpg (hors repo, non versionne)
 # -----------------------
-output * bg ~/.sway/wallpaper-bg.jpg fill
+output * bg ~/.background.jpg fill
 
 # -----------------------
 # Apparence
@@ -75,6 +75,9 @@ bindsym $mod+Shift+n exec foot -e impala
 # Recharger la config sway
 bindsym $mod+Shift+c reload
 
+# Verrouiller la session
+bindsym $mod+Shift+l exec $lock
+
 # Quitter sway
 bindsym $mod+Shift+e exec swaymsg exit
 
@@ -102,7 +105,6 @@ bindsym $mod+Shift+Right move right
 bindsym $mod+Shift+h move left
 bindsym $mod+Shift+j move down
 bindsym $mod+Shift+k move up
-bindsym $mod+Shift+l move right
 
 # -----------------------
 # Deplacement souris
@@ -117,7 +119,6 @@ tiling_drag enable
 # -----------------------
 bindsym $mod+b splith
 bindsym $mod+v splitv
-bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
 bindsym $mod+f fullscreen

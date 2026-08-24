@@ -11,6 +11,9 @@ pacman_packages_core:
   - xdg-desktop-portal-wlr
   - swayidle
   - gtklock
+  - gtklock-powerbar-module
+  - gtklock-playerctl-module
+  - ttf-fira-sans
   - waybar
   - ly
   - zsh

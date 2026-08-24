@@ -12,6 +12,8 @@
       - waybar
       - sway
       - foot
+      - wlogout
+      - gtklock
 
 - name: Stat des cibles dans ~/.config
   stat:

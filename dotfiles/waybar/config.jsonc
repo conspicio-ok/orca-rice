@@ -63,7 +63,7 @@
 			"8": "8",
 			"9": "9",
 			"10": "10",
-			"urgent": "  "
+			"urgent": "  "
 		},
 		"persistent_workspaces": {
 			"*": 5
@@ -73,7 +73,7 @@
 
 	// Updates Count
 	"custom/updates": {
-		"format": "  {}",
+		"format": "  {}",
 		// "escape": true,
 		"return-type": "json",
 		"exec": "~/.config/dotfiles/scripts/updates.sh",
@@ -88,7 +88,7 @@
 	"sway/scratchpad": {
 		"format": "{icon} {count}",
 		"show-empty": false,
-		"format-icons": ["", ""],
+		"format-icons": ["", ""],
 		"tooltip": true,
 		"tooltip-format": "{app}: {title}"
 	},
@@ -105,7 +105,7 @@
 	"backlight": {
 		// "device": "acpi_video1",
 		"format": "{percent}% {icon}",
-		"format-icons": ["", "", "", "", "", "", "", "", ""]
+		"format-icons": ["", "", "", "", "", "", "", "", ""]
 	},
 	"battery": {
 		"states": {
@@ -115,12 +115,12 @@
 		},
 		"format": "{capacity}% {icon}",
 		"format-full": "{capacity}% {icon}",
-		"format-charging": "{capacity}% ",
-		"format-plugged": "{capacity}% ",
+		"format-charging": "{capacity}% ",
+		"format-plugged": "{capacity}% ",
 		"format-alt": "{time} {icon}",
 		// "format-good": "", // An empty format will hide the module
 		// "format-full": "",
-		"format-icons": ["", "", "", "", ""]
+		"format-icons": ["", "", "", "", ""]
 	},
 	"battery#bat2": {
 		"bat": "BAT2"
@@ -130,38 +130,38 @@
 	  "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
 	  "tooltip": true,
 	  "format-icons": {
-		"default": "",
-		"performance": "",
-		"balanced": "",
-		"power-saver": ""
+		"default": "",
+		"performance": "",
+		"balanced": "",
+		"power-saver": ""
 	  }
 	},
 
 	// Network
 	"network": {
-		"format-wifi": " ",
-		"format-ethernet": "{ipaddr}/{cidr} ",
+		"format-wifi": " ",
+		"format-ethernet": "{ipaddr}/{cidr} ",
 		"tooltip-format": "{essid}",
-		"format-linked": "{ifname} (No IP) ",
+		"format-linked": "{ifname} (No IP) ",
 		"format-disconnected": "Disconnected ⚠",
-		"format-alt": "   {essid}"
+		"format-alt": "   {essid}"
 	},
 	"pulseaudio": {
 		"scroll-step": 1,
 		"format": "{volume}% {icon}  {format_source}",
-		"format-bluetooth": "{volume}% {icon} {format_source}",
-		"format-bluetooth-muted": " {icon} {format_source}",
-		"format-muted": " {format_source}",
-		"format-source": "",
-		"format-source-muted": "",
+		"format-bluetooth": "{volume}% {icon} {format_source}",
+		"format-bluetooth-muted": " {icon} {format_source}",
+		"format-muted": " {format_source}",
+		"format-source": "",
+		"format-source-muted": "",
 		"format-icons": {
-			"headphone": "",
-			"hands-free": "",
-			"headset": "",
-			"phone": "",
-			"portable": "",
-			"car": "",
-			"default": ["", "", ""]
+			"headphone": "",
+			"hands-free": "",
+			"headset": "",
+			"phone": "",
+			"portable": "",
+			"car": "",
+			"default": ["", "", ""]
 		},
 		"on-click": "pavucontrol"
 	},
@@ -173,9 +173,9 @@
         "format-no-controller": ""
     },
 	"custom/bluetooth": {
-		"format": " ON",
+		"format": " ON",
 		"format-disabled": "",
-        "format-off": " OFF",
+        "format-off": " OFF",
         "interval": 30,
 		"tooltip": false,
 		"on-click": "nohup $HOME/.config/dotfiles/modules-waybar/wofi-bluetooth.sh"
@@ -184,14 +184,15 @@
 	// Settings menu
 	"custom/settings":
 	{
-		"format" : " ",
+		"format" : " ",
 		"on-click": "nohup $HOME/.config/dotfiles/scripts/config-launcher.sh"
 	},
 	// Power Menu
 	"custom/power": {
-		"format" : " ",
+		"format" : " ",
 		"tooltip-format": "Powermenu",
 		"on-click": "wlogout -b 3",
 		"tooltip": false
 	}
 }
+

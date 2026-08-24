@@ -52,6 +52,7 @@ dotfiles/
   sway/                    config sway partagée + config.d/local (généré, ignoré)
   waybar/                  config waybar
   foot/                    config foot
+  wlogout/                 layout, style.css et icons
   zsh/                     zshrc — symlinké vers ~/.zshrc
 roles/
   sudo_askpass yay packages dotfiles services shell neovim
