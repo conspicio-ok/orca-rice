@@ -10,7 +10,7 @@ pacman_packages_core:
   - wayland-protocols
   - xdg-desktop-portal-wlr
   - swayidle
-  - swaylock
+  - gtklock
   - waybar
   - ly
   - zsh
@@ -30,7 +30,7 @@ pacman_packages_core:
   # Fonts
   - ttf-meslo-nerd
   - ttf-jetbrains-mono-nerd
-  - woff2-font-awesome
+  - otf-font-awesome
   # Compositor utils
   - wl-clipboard
   - grim
