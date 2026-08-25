@@ -10,8 +10,8 @@
 
 Pour cacher le dossier de conf :
 ```bash
-git clone git@github.com:conspicio-ok/orca-rice.git ~/.ansible
-cd .ansible
+git clone git@github.com:conspicio-ok/orca-conf.git ~/.orca-conf
+cd .orca-conf
 ```
 
 Sur desktop :
