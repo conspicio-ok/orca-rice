@@ -1,10 +1,4 @@
-/* -----------------------------------------------------
- * Waybar — config autonome (dérivée ML4W, desync)
- * ----------------------------------------------------- */
-
-@define-color text        #cfcfcf;
-@define-color textdim     #808080;
-@define-color textbright  #ebebeb;
+@import "colors.css";
 
 /* General ------------------------------------------------ */
 
@@ -19,7 +13,7 @@
 }
 
 window#waybar {
-    background-color: rgba(60,60,60,0.2);
+    background-color: @background;
     border-radius: 12px;
     transition-property: background-color;
     transition-duration: .5s;
@@ -32,23 +26,23 @@ window#waybar {
     margin: 2px 8px 3px 1px;
     padding: 0px 2px;
     font-weight: bold;
-    color: @textdim;
+    color: @secondary;
 }
 
 #workspaces button {
     padding: 0px 6px;
     margin: 3px 2px;
     background: transparent;
-    color: @textdim;
+    color: @secondary;
 }
 
 #workspaces button.focused {
-    color: @textbright;
+    color: @primary;
 }
 
 #workspaces button:hover {
     background: transparent;
-    color: @textdim;
+    color: @secondary;
 }
 
 /* Modules ----------------------------------------------- */
@@ -64,7 +58,7 @@ window#waybar {
 #custom-settings,
 #custom-power {
     background: transparent;
-    color: @text;
+    color: @primary;
     margin: 3px 6px 3px 0px;
     padding: 0px;
 }
@@ -95,7 +89,7 @@ window#waybar {
 /* États informatifs ------------------------------------- */
 
 #pulseaudio.muted {
-    color: @textdim;
+    color: @secondary;
 }
 
 #bluetooth.off {
@@ -105,12 +99,11 @@ window#waybar {
 
 /* Alertes ----------------------------------------------- */
 
-#custom-updates.yellow {
-    color: #ff9a3c;
-}
-
-#custom-updates.red {
-    color: #dc2f2f;
+#custom-updates.warning {
+    background-color: rgba(220, 47, 47, 0.2);
+    border-radius: 10px;
+    padding: 0px 8px;
+    box-shadow: 0 0 4px 1px rgba(220, 47, 47, 0.45);
 }
 
 #battery.critical:not(.charging) {
@@ -126,5 +119,5 @@ tooltip {
 }
 
 tooltip label {
-    color: @text;
+    color: @primary;
 }

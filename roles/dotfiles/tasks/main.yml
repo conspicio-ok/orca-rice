@@ -63,3 +63,16 @@
     src: sway-local.j2
     dest: "{{ playbook_dir }}/dotfiles/sway/config.d/local"
     mode: '0644'
+
+- name: Créer le dossier des scripts consommés par waybar
+  file:
+    path: "{{ user_home }}/.config/dotfiles/scripts"
+    state: directory
+    mode: '0755'
+
+- name: Déployer le script de comptage des mises à jour
+  file:
+    src: "{{ playbook_dir }}/dotfiles/scripts/count_updates.sh"
+    dest: "{{ user_home }}/.config/dotfiles/scripts/count_updates.sh"
+    state: link
+    force: true
