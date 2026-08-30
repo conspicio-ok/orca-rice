@@ -1,1 +1,7 @@
-../theme/default.css
+@define-color background rgba(60, 60, 60, 0.2);
+@define-color primary    #cfcfcf;
+@define-color secondary  #808080;
+@define-color accent     #e08e3c;
+@define-color accent-alt #8fc4e8;
+@define-color warning    #e8c08f;
+@define-color critical   #e89393;

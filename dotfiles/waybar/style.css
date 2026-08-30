@@ -3,7 +3,7 @@
 /* General ------------------------------------------------ */
 
 * {
-    font-family: "Fira Sans Semibold", "Font Awesome 7 Free", "Font Awesome 7 Brands", FontAwesome, sans-serif;
+    font-family: "Fira Sans Semibold", "JetBrainsMono Nerd Font", "Font Awesome 7 Free", "Font Awesome 7 Brands", FontAwesome, sans-serif;
     font-size: 16px;
     border: none;
     border-radius: 0;
@@ -74,6 +74,11 @@ window#waybar {
     padding: 0px 6px;
 }
 
+#custom-settings:hover {
+    background: transparent;
+    color: @primary;
+}
+
 #tray {
     margin: 3px 6px 3px 0px;
 }
@@ -92,9 +97,12 @@ window#waybar {
     color: @secondary;
 }
 
-#bluetooth.off {
-    margin: 0px;
-    padding: 0px;
+#pulseaudio.max {
+    color: @accent;
+}
+
+#backlight.max {
+    color: @accent-alt;
 }
 
 /* Alertes ----------------------------------------------- */
@@ -106,8 +114,12 @@ window#waybar {
     box-shadow: 0 0 4px 1px rgba(220, 47, 47, 0.45);
 }
 
+#battery.warning:not(.charging) {
+    color: @warning;
+}
+
 #battery.critical:not(.charging) {
-    color: #f53c3c;
+    color: @critical;
 }
 
 /* Tooltips ---------------------------------------------- */

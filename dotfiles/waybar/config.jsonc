@@ -1,6 +1,6 @@
 {
 	// TOP
-	"layer": "top",
+	"layer": "bottom",
 	"position": "top",
 	"margin-top": 6,
 	"margin-left": 12,
@@ -30,7 +30,6 @@
 	"modules-right": [
 		"pulseaudio",
 		"bluetooth",
-		"custom/bluetooth",
 		"power-profiles-daemon",
 		"network",
 		"backlight",
@@ -100,27 +99,47 @@
 	"clock": {
 		"timezone": "Europe/Paris",
 		"tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-		"format-alt": "{:%d/%m/%Y}"
+		"format-alt": "{:%d %b %Y}",
+		// Le calendrier n'est qu'une grille de dates : la seule mise en forme
+		// possible passe par du markup Pango, ou les couleurs sont litterales
+		// (colors.css ne s'applique pas au contenu d'un tooltip). Pas de fond
+		// arrondi possible : bgcolor ne produit qu'un rectangle plein.
+		"calendar": {
+			"mode": "month",
+			"format": {
+				"today": "<span color='#ffffff'><b>{}</b></span>"
+			}
+		}
 	},
 	"backlight": {
 		// "device": "acpi_video1",
-		"format": "{percent}% {icon}",
-		"format-icons": ["", "", "", "", "", "", "", "", ""]
+		"format": "{icon}",
+		// backlight evalue ses states en mode ">=" : un seul seuil suffit.
+		"states": {
+			"max": 100
+		},
+		"format-icons": ["󰃞", "󰃟", "󰃠"]
 	},
 	"battery": {
+		// Le module battery evalue ses states en mode "<=" : critical prime car
+		// le premier seuil atteint en ordre croissant gagne.
 		"states": {
-			// "good": 95,
-			"warning": 30,
-			"critical": 15
+			"critical": 10,
+			"warning": 20
 		},
 		"format": "{capacity}% {icon}",
 		"format-full": "{capacity}% {icon}",
-		"format-charging": "{capacity}% ",
-		"format-plugged": "{capacity}% ",
+		"format-charging": "{capacity}% {icon}",
+		"format-plugged": "{capacity}% 󰚥",
 		"format-alt": "{time} {icon}",
 		// "format-good": "", // An empty format will hide the module
 		// "format-full": "",
-		"format-icons": ["", "", "", "", ""]
+		// Objet et non tableau : le module batterie choisit sa rampe selon le
+		// statut, ce qui rend la progression lisible jusqu'a 100 % en charge.
+		"format-icons": {
+			"charging": ["󰢜", "󰂆", "󰂇", "󰂈", "󰢝", "󰂉", "󰢞", "󰂊", "󰂋", "󰂅"],
+			"default": ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
+		}
 	},
 	"battery#bat2": {
 		"bat": "BAT2"
@@ -139,53 +158,66 @@
 
 	// Network
 	"network": {
-		"format-wifi": " ",
+		"format-wifi": "󰖩 ",
 		"format-ethernet": "{ipaddr}/{cidr} ",
 		"tooltip-format": "{essid}",
 		"format-linked": "{ifname} (No IP) ",
-		"format-disconnected": "Disconnected ⚠",
-		"format-alt": "   {essid}"
+		"format-disconnected": "󰖪 ",
+		"format-alt": "󰖩   {essid}"
 	},
 	"pulseaudio": {
 		"scroll-step": 1,
-		"format": "{volume}% {icon}  {format_source}",
-		"format-bluetooth": "{volume}% {icon} {format_source}",
-		"format-bluetooth-muted": " {icon} {format_source}",
-		"format-muted": " {format_source}",
-		"format-source": "",
-		"format-source-muted": "",
+		// Le module pulseaudio evalue ses states en mode "lesser" (volume <= seuil),
+		// a rebours de la doc : "normal" absorbe 0-99 pour que .max ne se declenche
+		// qu'a 100 et au-dela.
+		"states": {
+			"normal": 99,
+			"max": 100
+		},
+		"format": "{icon}  {format_source}",
+		"format-bluetooth": "{icon} {format_source}",
+		"format-bluetooth-muted": "󰝟 {icon} {format_source}",
+		"format-muted": "󰝟 {format_source}",
+		"format-source": "󰍬",
+		"format-source-muted": "󰍭",
 		"format-icons": {
-			"headphone": "",
+			"headphone": "󰋋",
 			"hands-free": "",
-			"headset": "",
+			"headset": "󰋎",
 			"phone": "",
 			"portable": "",
 			"car": "",
-			"default": ["", "", ""]
+			"default": [
+				"󰝟", "󰕿", "󰕿", "󰕿", "󰕿", "󰕿", "󰕿", "󰕿", "󰕿", "󰕿",
+				"󰕿", "󰕿", "󰕿", "󰕿", "󰕿", "󰕿", "󰕿", "󰕿", "󰕿", "󰕿",
+				"󰕿", "󰕿", "󰕿", "󰕿", "󰕿", "󰕿", "󰕿", "󰕿", "󰕿", "󰕿",
+				"󰖀", "󰖀", "󰖀", "󰖀", "󰖀", "󰖀", "󰖀", "󰖀", "󰖀", "󰖀",
+				"󰖀", "󰖀", "󰖀", "󰖀", "󰖀", "󰖀", "󰖀", "󰖀", "󰖀", "󰖀",
+				"󰖀", "󰖀", "󰖀", "󰖀", "󰖀", "󰖀", "󰖀", "󰖀", "󰖀", "󰖀",
+				"󰖀", "󰖀", "󰖀", "󰖀", "󰖀", "󰖀", "󰖀", "󰖀", "󰖀", "󰖀",
+				"󰕾", "󰕾", "󰕾", "󰕾", "󰕾", "󰕾", "󰕾", "󰕾", "󰕾", "󰕾",
+				"󰕾", "󰕾", "󰕾", "󰕾", "󰕾", "󰕾", "󰕾", "󰕾", "󰕾", "󰕾",
+				"󰕾", "󰕾", "󰕾", "󰕾", "󰕾", "󰕾", "󰕾", "󰕾", "󰕾", "󰕾"
+			]
 		},
 		"on-click": "pavucontrol"
 	},
 	"bluetooth": {
-        "format-disabled": "",
-        "format-off": "",
+        "format-disabled": "󰂲",
+        "format-off": "󰂲",
+        "format-on": "󰂯",
+        "format-connected": "󰂱 {device_alias}",
         "interval": 30,
-        "on-click": "blueman-manager",
-        "format-no-controller": ""
+        "on-click": "if bluetoothctl show | grep -q 'Powered: yes'; then swaymsg '[app_id=bluetuith] focus' || setsid foot -a bluetuith bluetuith; else bluetoothctl power on; fi",
+        "format-no-controller": "󰂲"
     },
-	"custom/bluetooth": {
-		"format": " ON",
-		"format-disabled": "",
-        "format-off": " OFF",
-        "interval": 30,
-		"tooltip": false,
-		"on-click": "nohup $HOME/.config/dotfiles/modules-waybar/wofi-bluetooth.sh"
- 	},
 
 	// Settings menu
 	"custom/settings":
 	{
 		"format" : " ",
-		"on-click": "nohup $HOME/.config/dotfiles/scripts/config-launcher.sh"
+		"on-click": "pkill -x orca-settings || setsid $HOME/.local/bin/orca-settings",
+		"tooltip": false
 	},
 	// Power Menu
 	"custom/power": {
