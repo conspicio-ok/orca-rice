@@ -114,6 +114,7 @@
 	"backlight": {
 		// "device": "acpi_video1",
 		"format": "{icon}",
+		"tooltip": false,
 		// backlight evalue ses states en mode ">=" : un seul seuil suffit.
 		"states": {
 			"max": 100
@@ -163,7 +164,7 @@
 		"tooltip-format": "{essid}",
 		"format-linked": "{ifname} (No IP) ",
 		"format-disconnected": "󰖪 ",
-		"format-alt": "󰖩   {essid}"
+		"on-click": "swaymsg '[app_id=impala] focus' || setsid foot -a impala impala"
 	},
 	"pulseaudio": {
 		"scroll-step": 1,
@@ -174,12 +175,10 @@
 			"normal": 99,
 			"max": 100
 		},
-		"format": "{icon}  {format_source}",
-		"format-bluetooth": "{icon} {format_source}",
-		"format-bluetooth-muted": "󰝟 {icon} {format_source}",
-		"format-muted": "󰝟 {format_source}",
-		"format-source": "󰍬",
-		"format-source-muted": "󰍭",
+		"format": "{icon}",
+		"format-bluetooth": "{icon}",
+		"format-bluetooth-muted": "󰝟 {icon}",
+		"format-muted": "󰝟",
 		"format-icons": {
 			"headphone": "󰋋",
 			"hands-free": "",

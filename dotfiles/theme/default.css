@@ -1,3 +1,5 @@
 @define-color background rgba(60, 60, 60, 0.2);
 @define-color primary    #cfcfcf;
 @define-color secondary  #808080;
+@define-color accent     #e08e3c;
+@define-color accent-alt #3c8ee0;

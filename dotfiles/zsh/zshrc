@@ -45,3 +45,6 @@ export PATH=$PATH:$ANDROID_HOME/tools
 export PATH=$PATH:$ANDROID_HOME/tools/bin
 
 export PATH="$(npm config get prefix)/bin:$PATH"
+
+# Claude
+export PATH="$HOME/.local/bin:$PATH"
